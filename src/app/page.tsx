@@ -2,6 +2,7 @@
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ScrollFollower from "@/components/layout/ScrollFollower";
 import Hero from "@/sections/Hero";
 import About from "@/sections/About";
 import Skills from "@/sections/Skills";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground scroll-smooth">
       <Navbar />
+      <ScrollFollower />
 
       <main className="flex-1 flex flex-col">
         {/* Sections */}
