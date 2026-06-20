@@ -5,7 +5,7 @@ import { portfolioConfig } from "@/data/portfolioConfig";
 import { ArrowRight, Terminal, FileText, MapPin } from "lucide-react";
 
 export default function Hero() {
-  const { name, title, subTitle, bio, location, socials, resumeUrl } = portfolioConfig.profile;
+  const { name, title, bio, location, resumeUrl } = portfolioConfig.profile;
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -158,7 +158,7 @@ export default function Projects() {
             viewport={{ once: true, margin: "-50px" }}
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
-            {projects.map((project, idx) => (
+            {projects.map((project) => (
               <motion.div
                 key={project.repoName}
                 variants={itemVariants}

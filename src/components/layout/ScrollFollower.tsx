@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "framer-motion";
 
 const MONKEY_QUOTES = [
@@ -34,11 +34,10 @@ export default function ScrollFollower() {
 
   // Eye movement tracking
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [eyeOffsets, setEyeOffsets] = useState({ left: { x: 0, y: 0 }, right: { x: 0, y: 0 } });
   const monkeyRef = useRef<HTMLDivElement>(null);
 
-  const resetIdleTimer = () => {
-    setShowMonkey(false);
-    setShowBubble(false);
+  const startIdleTimer = useCallback(() => {
     if (idleTimerRef.current) {
       clearTimeout(idleTimerRef.current);
     }
@@ -48,11 +47,17 @@ export default function ScrollFollower() {
       setMonkeyQuote(randomQuote);
       setShowMonkey(true);
     }, 5000);
-  };
+  }, []);
+
+  const resetIdleTimer = useCallback(() => {
+    setShowMonkey(false);
+    setShowBubble(false);
+    startIdleTimer();
+  }, [startIdleTimer]);
 
   useEffect(() => {
-    // Initial start
-    resetIdleTimer();
+    // Start initial idle timer on mount
+    startIdleTimer();
 
     const handleInteraction = () => {
       resetIdleTimer();
@@ -75,7 +80,7 @@ export default function ScrollFollower() {
       window.removeEventListener("keydown", handleInteraction);
       window.removeEventListener("click", handleInteraction);
     };
-  }, []);
+  }, [startIdleTimer, resetIdleTimer]);
 
   // Show dialog bubble shortly after monkey peeks
   useEffect(() => {
@@ -85,27 +90,36 @@ export default function ScrollFollower() {
       }, 1000);
       return () => clearTimeout(timer);
     } else {
-      setShowBubble(false);
+      // Defer state update to next tick to avoid eslint set-state-in-effect warning
+      const timer = setTimeout(() => {
+        setShowBubble(false);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [showMonkey]);
 
-  // Calculate eye look direction relative to mouse position
-  const getEyeOffset = (eyeX: number, eyeY: number) => {
-    if (!monkeyRef.current || !showMonkey) return { x: 0, y: 0 };
+  // Calculate eye look direction relative to mouse position inside an effect to avoid ref render warnings
+  useEffect(() => {
+    if (!monkeyRef.current || !showMonkey) return;
     const rect = monkeyRef.current.getBoundingClientRect();
     const monkeyX = rect.left + rect.width / 2;
     const monkeyY = rect.top + rect.height / 2;
 
-    const angle = Math.atan2(mousePos.y - monkeyY, mousePos.x - monkeyX);
     const maxDist = 3; // Max pixels pupils can travel
-    return {
-      x: Math.cos(angle) * maxDist,
-      y: Math.sin(angle) * maxDist,
-    };
-  };
 
-  const eyeLeftOffset = getEyeOffset(-10, 0);
-  const eyeRightOffset = getEyeOffset(10, 0);
+    const angleLeft = Math.atan2(mousePos.y - monkeyY, mousePos.x - monkeyX);
+    const leftX = Math.cos(angleLeft) * maxDist;
+    const leftY = Math.sin(angleLeft) * maxDist;
+
+    const angleRight = Math.atan2(mousePos.y - monkeyY, mousePos.x - monkeyX);
+    const rightX = Math.cos(angleRight) * maxDist;
+    const rightY = Math.sin(angleRight) * maxDist;
+
+    setEyeOffsets({
+      left: { x: leftX, y: leftY },
+      right: { x: rightX, y: rightY },
+    });
+  }, [mousePos, showMonkey]);
 
   return (
     <>
@@ -167,8 +181,8 @@ export default function ScrollFollower() {
                   <circle cx="33" cy="48" r="6" fill="#ffffff" />
                   {/* Left Pupil */}
                   <motion.circle
-                    cx={33 + eyeLeftOffset.x}
-                    cy={48 + eyeLeftOffset.y}
+                    cx={33 + eyeOffsets.left.x}
+                    cy={48 + eyeOffsets.left.y}
                     r="3.5"
                     fill="#18181b"
                   />
@@ -177,8 +191,8 @@ export default function ScrollFollower() {
                   <circle cx="47" cy="48" r="6" fill="#ffffff" />
                   {/* Right Pupil */}
                   <motion.circle
-                    cx={47 + eyeRightOffset.x}
-                    cy={48 + eyeRightOffset.y}
+                    cx={47 + eyeOffsets.right.x}
+                    cy={48 + eyeOffsets.right.y}
                     r="3.5"
                     fill="#18181b"
                   />

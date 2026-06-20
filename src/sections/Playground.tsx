@@ -53,7 +53,6 @@ export default function Playground() {
 
     const parts = trimmed.split(" ");
     const command = parts[0].toLowerCase();
-    const args = parts.slice(1);
 
     // Save to history
     setCommandHistory((prev) => [...prev, trimmed]);
@@ -242,12 +241,12 @@ export default function Playground() {
                       style={{
                         left: `${i * 7}%`,
                         animationDelay: `${i * 0.4}s`,
-                        animationDuration: `${1.5 + Math.random() * 2}s`,
+                        animationDuration: `${1.5 + ((i * 7) % 3) * 0.7}s`,
                       }}
                     >
                       {Array.from({ length: 25 }).map((_, j) => (
                         <div key={j} style={{ opacity: (25 - j) / 25 }}>
-                          {String.fromCharCode(33 + Math.floor(Math.random() * 93))}
+                          {String.fromCharCode(33 + ((i * 37 + j * 13) % 93))}
                         </div>
                       ))}
                     </div>
