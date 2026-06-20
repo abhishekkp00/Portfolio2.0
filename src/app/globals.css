@@ -158,3 +158,17 @@
 .glow-accent {
   box-shadow: 0 0 40px -10px var(--ring);
 }
+
+/* Matrix rain keyframes */
+@keyframes matrix-drop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.animate-matrix-drop {
+  animation: matrix-drop 2.5s linear infinite;
+}
