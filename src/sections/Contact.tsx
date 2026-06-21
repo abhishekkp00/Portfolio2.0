@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { portfolioConfig } from "@/data/portfolioConfig";
 import { Mail, Linkedin, Github, Send, CheckCircle2, Clock } from "lucide-react";
+import TiltCard from "@/components/layout/TiltCard";
 
 export default function Contact() {
   const { email, github, linkedin } = portfolioConfig.profile.socials;
@@ -110,85 +111,94 @@ export default function Contact() {
         >
           {/* Left Column: Info, Clock, Socials */}
           <div className="lg:col-span-5 flex flex-col gap-8">
-            <motion.div
-              variants={itemVariants}
-              className="glass p-6 md:p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col gap-6"
-            >
-              <h3 className="text-lg font-bold font-mono tracking-tight flex items-center gap-2">
-                <Clock className="w-5 h-5 text-muted-foreground" />
-                Local Coordinates
-              </h3>
+            <motion.div variants={itemVariants} className="w-full">
+              <TiltCard maxRotation={4}>
+                <div className="glass p-6 md:p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col gap-6">
+                  <h3 className="text-lg font-bold font-mono tracking-tight flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-muted-foreground" />
+                    Local Coordinates
+                  </h3>
 
-              <div className="flex flex-col gap-2">
-                <span className="text-xs font-mono text-muted-foreground uppercase">Current Time ({location.split(",")[0]})</span>
-                <div className="text-3xl font-extrabold font-mono tracking-tight text-foreground">
-                  {currentTime || "00:00:00"}
+                  <div className="flex flex-col gap-2">
+                    <span className="text-xs font-mono text-muted-foreground uppercase">Current Time ({location.split(",")[0]})</span>
+                    <div className="text-3xl font-extrabold font-mono tracking-tight text-foreground">
+                      {currentTime || "00:00:00"}
+                    </div>
+                  </div>
+
+                  <div className="text-xs font-mono text-muted-foreground border-t border-border/40 pt-4 flex items-center justify-between">
+                    <span>Status:</span>
+                    <span className="flex items-center gap-1.5">
+                      <span className={`w-2 h-2 rounded-full ${isAwake ? 'bg-emerald-500' : 'bg-amber-500'} animate-pulse`}></span>
+                      {isAwake ? "Awake & Building" : "Offline / Sleeping"}
+                    </span>
+                  </div>
                 </div>
-              </div>
-
-              <div className="text-xs font-mono text-muted-foreground border-t border-border/40 pt-4 flex items-center justify-between">
-                <span>Status:</span>
-                <span className="flex items-center gap-1.5">
-                  <span className={`w-2 h-2 rounded-full ${isAwake ? 'bg-emerald-500' : 'bg-amber-500'} animate-pulse`}></span>
-                  {isAwake ? "Awake & Building" : "Offline / Sleeping"}
-                </span>
-              </div>
+              </TiltCard>
             </motion.div>
 
             {/* Quick Contact & Social Cards */}
             <div className="flex flex-col gap-4">
-              <motion.a
-                href={`mailto:${email}`}
-                variants={itemVariants}
-                className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex items-center gap-4 transition-all duration-200"
-              >
-                <div className="p-2.5 rounded-lg bg-muted/40 text-muted-foreground group-hover:text-foreground group-hover:bg-muted/80 transition-colors">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xs font-mono text-muted-foreground uppercase">Direct Mail</span>
-                  <span className="text-sm font-semibold">{email}</span>
-                </div>
-              </motion.a>
+              <motion.div variants={itemVariants} className="w-full">
+                <TiltCard maxRotation={5}>
+                  <a
+                    href={`mailto:${email}`}
+                    className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex items-center gap-4 transition-all duration-200 w-full"
+                  >
+                    <div className="p-2.5 rounded-lg bg-muted/40 text-muted-foreground group-hover:text-foreground group-hover:bg-muted/80 transition-colors">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-mono text-muted-foreground uppercase">Direct Mail</span>
+                      <span className="text-sm font-semibold">{email}</span>
+                    </div>
+                  </a>
+                </TiltCard>
+              </motion.div>
 
               <div className="grid grid-cols-2 gap-4">
-                <motion.a
-                  href={linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variants={itemVariants}
-                  className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex flex-col gap-3 transition-all duration-200"
-                >
-                  <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  <div className="flex flex-col">
-                    <span className="text-xs font-mono text-muted-foreground">LinkedIn</span>
-                    <span className="text-[10px] font-mono text-zinc-400 mt-1 truncate">Connect</span>
-                  </div>
-                </motion.a>
+                <motion.div variants={itemVariants} className="w-full">
+                  <TiltCard maxRotation={6}>
+                    <a
+                      href={linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex flex-col gap-3 transition-all duration-200 w-full"
+                    >
+                      <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                      <div className="flex flex-col">
+                        <span className="text-xs font-mono text-muted-foreground">LinkedIn</span>
+                        <span className="text-[10px] font-mono text-zinc-400 mt-1 truncate">Connect</span>
+                      </div>
+                    </a>
+                  </TiltCard>
+                </motion.div>
 
-                <motion.a
-                  href={github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variants={itemVariants}
-                  className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex flex-col gap-3 transition-all duration-200"
-                >
-                  <Github className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                  <div className="flex flex-col">
-                    <span className="text-xs font-mono text-muted-foreground">GitHub</span>
-                    <span className="text-[10px] font-mono text-zinc-400 mt-1 truncate">Follow</span>
-                  </div>
-                </motion.a>
+                <motion.div variants={itemVariants} className="w-full">
+                  <TiltCard maxRotation={6}>
+                    <a
+                      href={github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex flex-col gap-3 transition-all duration-200 w-full"
+                    >
+                      <Github className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                      <div className="flex flex-col">
+                        <span className="text-xs font-mono text-muted-foreground">GitHub</span>
+                        <span className="text-[10px] font-mono text-zinc-400 mt-1 truncate">Follow</span>
+                      </div>
+                    </a>
+                  </TiltCard>
+                </motion.div>
               </div>
             </div>
           </div>
 
           {/* Right Column: Interactive Form */}
           <div className="lg:col-span-7">
-            <motion.div
-              variants={itemVariants}
-              className="glass p-6 md:p-8 rounded-2xl border border-border/60 shadow-lg"
-            >
+            <motion.div variants={itemVariants} className="w-full">
+              <TiltCard maxRotation={2}>
+                <div className="glass p-6 md:p-8 rounded-2xl border border-border/60 shadow-lg w-full">
               <AnimatePresence mode="wait">
                 {status === "success" ? (
                   <motion.div
@@ -285,6 +295,8 @@ export default function Contact() {
                   </motion.form>
                 )}
               </AnimatePresence>
+                </div>
+              </TiltCard>
             </motion.div>
           </div>
         </motion.div>

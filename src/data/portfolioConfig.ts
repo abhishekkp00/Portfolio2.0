@@ -52,16 +52,16 @@ export interface PortfolioConfig {
 
 export const portfolioConfig: PortfolioConfig = {
   profile: {
-    name: "Abhishek Prajapati",
-    title: "Senior Backend & Full-Stack Engineer",
-    subTitle: "Building secure, high-performance distributed systems, ML pipelines, and polished user experiences.",
+    name: "Abhishek Kr Prajapati",
+    title: "CSE (Data Science) Undergraduate",
+    subTitle: "Aspiring Backend & MLOps Engineer",
     bio: "I am a technical builder based in Bengaluru, India. I specialize in designing and engineering robust backend systems, distributed network architectures, machine learning pipelines, and highly interactive user interfaces. I focus on clean code, system performance, and crafting premium, production-ready software.",
     location: "Bengaluru, Karnataka, India",
     timezone: "Asia/Kolkata",
     socials: {
-      github: "https://github.com/abhi-iterates", // Assuming user github name is abhi-iterates or similar, we will make it config-driven
-      linkedin: "https://linkedin.com/in/abhishek-prajapati",
-      email: "abhishek@example.com", // Placeholder to be customized, or we can use generic template
+      github: "https://github.com/abhishekkp00",
+      linkedin: "https://linkedin.com/in/abhishekkp00",
+      email: "abhishekfrcollege@gmail.com", 
     },
     resumeUrl: "/resume.pdf",
   },

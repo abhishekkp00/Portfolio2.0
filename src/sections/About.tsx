@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { portfolioConfig } from "@/data/portfolioConfig";
 import { Briefcase, Calendar, Star, Compass } from "lucide-react";
+import TiltCard from "@/components/layout/TiltCard";
 
 export default function About() {
   const { bio, location } = portfolioConfig.profile;
@@ -76,24 +77,25 @@ export default function About() {
         >
           {/* Left Column: Bio & Core Philosophies */}
           <div className="lg:col-span-5 flex flex-col gap-8">
-            <motion.div
-              variants={itemVariants}
-              className="glass p-8 rounded-2xl border border-border/60 shadow-xl flex flex-col gap-6"
-            >
-              <h3 className="text-xl font-bold font-mono tracking-tight flex items-center gap-2">
-                <Compass className="w-5 h-5 text-muted-foreground" />
-                The Developer Mindset
-              </h3>
-              <p className="text-muted-foreground leading-relaxed text-sm md:text-base font-sans">
-                {bio}
-              </p>
-              <div className="text-xs font-mono text-muted-foreground border-t border-border/40 pt-4 flex items-center justify-between">
-                <span>Location: {location}</span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Active for Hire
-                </span>
-              </div>
+            <motion.div variants={itemVariants} className="w-full">
+              <TiltCard>
+                <div className="glass p-8 rounded-2xl border border-border/60 shadow-xl flex flex-col gap-6">
+                  <h3 className="text-xl font-bold font-mono tracking-tight flex items-center gap-2">
+                    <Compass className="w-5 h-5 text-muted-foreground" />
+                    The Developer Mindset
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base font-sans">
+                    {bio}
+                  </p>
+                  <div className="text-xs font-mono text-muted-foreground border-t border-border/40 pt-4 flex items-center justify-between">
+                    <span>Location: {location}</span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      Active for Hire
+                    </span>
+                  </div>
+                </div>
+              </TiltCard>
             </motion.div>
 
             {/* Core Philosophies List */}
@@ -109,7 +111,7 @@ export default function About() {
                   key={idx}
                   variants={itemVariants}
                   whileHover={{ x: 6 }}
-                  className="glass p-5 rounded-xl border border-border/40 hover:border-border/80 transition-colors duration-200 flex gap-4"
+                  className="glass p-5 rounded-xl border border-border/40 hover:border-border/80 transition-all duration-200 flex gap-4 cursor-default"
                 >
                   <div className="flex-shrink-0 mt-0.5">
                     <Star className="w-4 h-4 text-zinc-400" />
@@ -135,7 +137,17 @@ export default function About() {
               Professional Timeline
             </motion.h3>
 
-            <div className="relative border-l border-border/80 ml-4 pl-8 flex flex-col gap-12">
+            <div className="relative ml-4 pl-8 flex flex-col gap-12">
+              {/* Timeline Connector Lines */}
+              <div className="absolute left-[9px] top-1.5 bottom-1.5 w-[2px] bg-border/30 dark:bg-border/10" />
+              <motion.div
+                initial={{ height: 0 }}
+                whileInView={{ height: "98%" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute left-[9px] top-1.5 w-[2px] bg-gradient-to-b from-indigo-500 via-purple-500 to-transparent origin-top"
+              />
+
               {timeline.map((item, index) => (
                 <motion.div
                   key={index}
@@ -143,45 +155,47 @@ export default function About() {
                   className="relative group"
                 >
                   {/* Timeline Dot */}
-                  <span className="absolute -left-[41px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-background border border-border/80 group-hover:border-foreground transition-colors duration-200">
+                  <span className="absolute -left-[41px] top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-background border border-border/80 group-hover:border-foreground transition-colors duration-200 z-10">
                     <span className={`h-2 w-2 rounded-full bg-zinc-400 group-hover:bg-foreground transition-colors duration-200 ${index === 0 ? 'bg-emerald-500 group-hover:bg-emerald-500 animate-pulse' : ''}`}></span>
                   </span>
 
                   {/* Timeline Card */}
-                  <div className="glass p-6 md:p-8 rounded-xl border border-border/40 hover:border-border/80 shadow-md group-hover:shadow-lg transition-all duration-300 flex flex-col gap-4">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
-                      <div className="flex flex-col">
-                        <h4 className="font-bold text-lg leading-tight tracking-tight">
-                          {item.role}
-                        </h4>
-                        <span className="text-sm font-mono text-zinc-400 mt-1">
-                          {item.company}
-                        </span>
+                  <TiltCard>
+                    <div className="glass p-6 md:p-8 rounded-xl border border-border/40 hover:border-border/80 shadow-md transition-all duration-300 flex flex-col gap-4">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                        <div className="flex flex-col">
+                          <h4 className="font-bold text-lg leading-tight tracking-tight">
+                            {item.role}
+                          </h4>
+                          <span className="text-sm font-mono text-zinc-400 mt-1">
+                            {item.company}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/60 bg-muted/30 w-fit text-xs font-mono text-muted-foreground">
+                          <Calendar className="w-3.5 h-3.5" />
+                          {item.year}
+                        </div>
                       </div>
-                      <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/60 bg-muted/30 w-fit text-xs font-mono text-muted-foreground">
-                        <Calendar className="w-3.5 h-3.5" />
-                        {item.year}
-                      </div>
+
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {item.description}
+                      </p>
+
+                      {item.highlights && item.highlights.length > 0 && (
+                        <ul className="flex flex-col gap-2 mt-2 border-t border-border/40 pt-4">
+                          {item.highlights.map((highlight, hIdx) => (
+                            <li
+                              key={hIdx}
+                              className="flex items-start gap-2.5 text-xs text-muted-foreground leading-relaxed"
+                            >
+                              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-400 flex-shrink-0" />
+                              <span>{highlight}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
-
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
-
-                    {item.highlights && item.highlights.length > 0 && (
-                      <ul className="flex flex-col gap-2 mt-2 border-t border-border/40 pt-4">
-                        {item.highlights.map((highlight, hIdx) => (
-                          <li
-                            key={hIdx}
-                            className="flex items-start gap-2.5 text-xs text-muted-foreground leading-relaxed"
-                          >
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-zinc-400 flex-shrink-0" />
-                            <span>{highlight}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+                  </TiltCard>
                 </motion.div>
               ))}
             </div>

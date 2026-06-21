@@ -32,26 +32,42 @@ export default function Hero() {
       id="home"
       className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-20 px-6 overflow-hidden"
     >
-      {/* Background Decorative Blur Gradients */}
-      <div className="absolute inset-0 -z-10 flex items-center justify-center opacity-30 dark:opacity-20 pointer-events-none">
-        <div className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-zinc-400 dark:bg-zinc-800 blur-[80px] md:blur-[120px] -translate-x-12 -translate-y-12"></div>
-        <div className="absolute w-[250px] h-[250px] md:w-[400px] md:h-[400px] rounded-full bg-zinc-300 dark:bg-zinc-900 blur-[60px] md:blur-[100px] translate-x-12 translate-y-12"></div>
-      </div>
-
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="w-full max-w-3xl flex flex-col gap-6 md:gap-8 text-center md:text-left"
+        className="w-full max-w-3xl flex flex-col gap-6 md:gap-8 text-center md:text-left relative z-10"
       >
-        {/* Availability Badge */}
-        <motion.div variants={itemVariants} className="inline-flex self-center md:self-start">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card text-xs font-mono text-muted-foreground">
-            <MapPin className="w-3.5 h-3.5 text-zinc-500" />
-            <span>{location}</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          </div>
-        </motion.div>
+        {/* Availability Badge & Status Indicators */}
+        <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 self-center md:self-start">
+          <motion.div variants={itemVariants} className="inline-flex">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card/60 backdrop-blur-sm text-xs font-mono text-muted-foreground shadow-sm">
+              <MapPin className="w-3.5 h-3.5 text-zinc-500" />
+              <span>{location}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center justify-center gap-2 text-[10px] font-mono text-zinc-400"
+          >
+            <span className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              API Uptime: 99.9%
+            </span>
+            <span className="text-zinc-600">•</span>
+            <span className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+              Ping: 14ms
+            </span>
+            <span className="text-zinc-600">•</span>
+            <span className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+              ML Service: Active
+            </span>
+          </motion.div>
+        </div>
 
         {/* Name and Titles */}
         <div className="flex flex-col gap-3 md:gap-4">
@@ -59,14 +75,18 @@ export default function Hero() {
             variants={itemVariants}
             className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight"
           >
-            Hi, I&apos;m <span className="bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent">{name}</span>
+            Hi, I&apos;m{" "}
+            <span className="relative inline-block bg-gradient-to-r from-foreground via-zinc-400 to-foreground bg-clip-text text-transparent group cursor-default">
+              {name}
+              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full" />
+            </span>
           </motion.h1>
-          
+
           <motion.h2
             variants={itemVariants}
-            className="text-xl sm:text-2xl md:text-3xl font-mono font-medium text-muted-foreground leading-relaxed"
+            className="text-xl sm:text-2xl md:text-3xl font-mono font-medium text-muted-foreground leading-relaxed flex items-center justify-center md:justify-start gap-2"
           >
-            {title}
+            <span className="text-indigo-400 font-bold">&gt;</span> {title}
           </motion.h2>
         </div>
 
@@ -83,31 +103,41 @@ export default function Hero() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4"
         >
-          <a
-            href="#playground"
-            className="group flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-primary px-6 text-xs font-mono font-semibold text-primary-foreground hover:opacity-90 transition-all duration-200"
-          >
-            <Terminal className="w-4 h-4" />
-            Launch Dev Shell
-            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-          </a>
+          {/* Glowing Primary CTA */}
+          <div className="relative group w-full sm:w-auto">
+            <div className="absolute -inset-[1px] rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-500 opacity-60 blur-[3px] group-hover:opacity-100 group-hover:blur-[6px] transition-all duration-300" />
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href="#playground"
+              className="relative flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-black text-xs font-mono font-semibold text-white px-6 transition-all duration-200 border border-zinc-800"
+            >
+              <Terminal className="w-4 h-4 text-emerald-400" />
+              Launch Dev Shell
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </motion.a>
+          </div>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98 }}
             href="#projects"
-            className="flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-border bg-card/50 hover:bg-accent px-6 text-xs font-mono font-semibold transition-all duration-200"
+            className="flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-border/80 bg-card/60 backdrop-blur-sm hover:bg-accent/80 px-6 text-xs font-mono font-semibold transition-all duration-200"
           >
             Explore Projects
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
+            whileHover={{ scale: 1.02, y: -1 }}
+            whileTap={{ scale: 0.98 }}
             href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-border bg-card/50 hover:bg-accent px-6 text-xs font-mono font-semibold transition-all duration-200"
+            className="flex h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-border/80 bg-card/60 backdrop-blur-sm hover:bg-accent/80 px-6 text-xs font-mono font-semibold transition-all duration-200"
           >
-            <FileText className="w-4 h-4" />
+            <FileText className="w-4 h-4 text-zinc-500" />
             Resume
-          </a>
+          </motion.a>
         </motion.div>
       </motion.div>
     </section>

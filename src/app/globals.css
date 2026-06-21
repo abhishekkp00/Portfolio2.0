@@ -64,6 +64,9 @@
   --ring: #18181b;
 
   --radius: 0.75rem;
+
+  --ambient-glow-color-1: rgba(99, 102, 241, 0.05);
+  --ambient-glow-color-2: rgba(168, 85, 247, 0.02);
 }
 
 .dark {
@@ -94,6 +97,9 @@
   --border: #27272a;
   --input: #27272a;
   --ring: #d4d4d8;
+
+  --ambient-glow-color-1: rgba(99, 102, 241, 0.08);
+  --ambient-glow-color-2: rgba(168, 85, 247, 0.04);
 }
 
 @layer base {
@@ -134,10 +140,11 @@
 
 /* Glassmorphism utility classes */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(228, 228, 231, 0.4);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
 }
 
 .glass-light {
@@ -148,10 +155,11 @@
 }
 
 .dark .glass {
-  background: rgba(9, 9, 11, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(39, 39, 42, 0.5);
+  background: rgba(9, 9, 11, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(39, 39, 42, 0.35);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* Accent Glow Effect */

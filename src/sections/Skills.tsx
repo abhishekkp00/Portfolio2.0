@@ -19,6 +19,8 @@ import {
   Terminal,
 } from "lucide-react";
 
+import TiltCard from "@/components/layout/TiltCard";
+
 interface SkillIconProps {
   iconName: string;
   className?: string;
@@ -151,31 +153,33 @@ export default function Skills() {
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
         >
           {skills.map((category, catIdx) => (
-            <motion.div
-              key={catIdx}
-              variants={itemVariants}
-              className="glass p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col gap-6"
-            >
-              <h3 className="text-lg font-bold font-mono tracking-tight text-foreground border-b border-border/40 pb-3 flex items-center gap-2">
-                <span className="text-xs font-mono text-zinc-400">0{catIdx + 1}.</span>
-                {category.category}
-              </h3>
+            <motion.div key={catIdx} variants={itemVariants} className="w-full h-full">
+              <TiltCard className="w-full h-full">
+                <div className="glass p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col gap-6 h-full">
+                  <h3 className="text-lg font-bold font-mono tracking-tight text-foreground border-b border-border/40 pb-3 flex items-center gap-2">
+                    <span className="text-xs font-mono text-zinc-400">0{catIdx + 1}.</span>
+                    {category.category}
+                  </h3>
 
-              <div className="grid grid-cols-2 gap-4">
-                {category.items.map((skill, skillIdx) => (
-                  <div
-                    key={skillIdx}
-                    className="group flex items-center gap-3 p-3.5 rounded-xl border border-border/30 hover:border-border/80 bg-muted/10 hover:bg-muted/30 transition-all duration-200"
-                  >
-                    <div className="flex-shrink-0 text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                      <SkillIcon iconName={skill.iconName} className="w-5 h-5" />
-                    </div>
-                    <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                      {skill.name}
-                    </span>
+                  <div className="grid grid-cols-2 gap-4">
+                    {category.items.map((skill, skillIdx) => (
+                      <motion.div
+                        key={skillIdx}
+                        whileHover={{ scale: 1.04, y: -2 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="group flex items-center gap-3 p-3.5 rounded-xl border border-border/30 hover:border-border/80 bg-muted/10 hover:bg-muted/30 transition-all duration-200 cursor-default select-none shadow-sm hover:shadow-md"
+                      >
+                        <div className="flex-shrink-0 text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                          <SkillIcon iconName={skill.iconName} className="w-5 h-5" />
+                        </div>
+                        <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                          {skill.name}
+                        </span>
+                      </motion.div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
