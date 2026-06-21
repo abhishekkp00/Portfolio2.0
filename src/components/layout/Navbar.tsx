@@ -252,21 +252,21 @@ export default function Navbar() {
                       <div>
                         <span className="text-emerald-500 font-bold">&gt; </span>
                         <span className="text-foreground font-semibold">channel:</span>{" "}
-                        <Typewriter text="@abhi.iterates (Insta & YT)" delay={20} onComplete={() => setTypingStep(2)} />
+                        <Typewriter text="@abhi.iterates (Instagram)" delay={20} onComplete={() => setTypingStep(2)} />
                       </div>
                     )}
                     {typingStep >= 2 && (
                       <div>
                         <span className="text-emerald-500 font-bold">&gt; </span>
                         <span className="text-foreground font-semibold">mentoring:</span>{" "}
-                        <Typewriter text="10k+ engineering students" delay={20} onComplete={() => setTypingStep(3)} />
+                        <Typewriter text="1000+ engineering students" delay={20} onComplete={() => setTypingStep(3)} />
                       </div>
                     )}
                     {typingStep >= 3 && (
                       <div>
                         <span className="text-emerald-500 font-bold">&gt; </span>
                         <span className="text-foreground font-semibold">notes:</span>{" "}
-                        <Typewriter text="Placement roadmaps & study material" delay={20} onComplete={() => setTypingStep(4)} />
+                        <Typewriter text="Placement roadmaps & dev contents" delay={20} onComplete={() => setTypingStep(4)} />
                       </div>
                     )}
                     {typingStep >= 4 && (
