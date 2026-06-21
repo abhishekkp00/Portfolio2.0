@@ -59,10 +59,10 @@ export default function About() {
         {/* Section Heading */}
         <div className="flex flex-col gap-3 mb-16 text-center md:text-left">
           <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase">
-            01 / Profile & History
+            01 / Biography & Mentorship
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-            About & Experience
+            About & Impact
           </h2>
           <div className="h-1 w-20 bg-foreground/20 rounded mt-1 self-center md:self-start"></div>
         </div>
@@ -133,8 +133,8 @@ export default function About() {
               variants={itemVariants}
               className="text-xl font-bold font-mono tracking-tight flex items-center gap-2 mb-2 pl-2"
             >
-              <Briefcase className="w-5 h-5 text-muted-foreground" />
-              Professional Timeline
+              <Compass className="w-5 h-5 text-muted-foreground" />
+              Community Mentorship & Impact
             </motion.h3>
 
             <div className="relative ml-4 pl-8 flex flex-col gap-12">

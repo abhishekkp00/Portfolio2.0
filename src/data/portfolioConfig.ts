@@ -22,6 +22,8 @@ export interface PortfolioConfig {
       linkedin: string;
       email: string;
       twitter?: string;
+      instagram?: string;
+      youtube?: string;
     };
     resumeUrl: string;
   };
@@ -54,14 +56,16 @@ export const portfolioConfig: PortfolioConfig = {
   profile: {
     name: "Abhishek Kr Prajapati",
     title: "CSE (Data Science) Undergraduate",
-    subTitle: "Aspiring Backend & MLOps Engineer",
-    bio: "I am a technical builder based in Bengaluru, India. I specialize in designing and engineering robust backend systems, distributed network architectures, machine learning pipelines, and highly interactive user interfaces. I focus on clean code, system performance, and crafting premium, production-ready software.",
+    subTitle: "Developer, Educator & Mentor (@abhi.iterates)",
+    bio: "I am a developer and educator based in Bengaluru, India. I specialize in backend systems, distributed network architectures, and machine learning pipelines. Through my platform, abhi.iterates (Instagram & YouTube), I mentor engineering students, share placement roadmaps, and distribute structured study notes to accelerate placement preparation.",
     location: "Bengaluru, Karnataka, India",
     timezone: "Asia/Kolkata",
     socials: {
       github: "https://github.com/abhishekkp00",
       linkedin: "https://linkedin.com/in/abhishekkp00",
-      email: "abhishekfrcollege@gmail.com", 
+      email: "abhishekfrcollege@gmail.com",
+      instagram: "https://instagram.com/abhi.iterates",
+      youtube: "https://youtube.com/@abhi.iterates",
     },
     resumeUrl: "/resume.pdf",
   },
@@ -107,32 +111,24 @@ export const portfolioConfig: PortfolioConfig = {
   timeline: [
     {
       year: "2024 - Present",
-      role: "Senior Creative Developer & Full-Stack Architect",
-      company: "Independent / Projects",
-      description: "Architected secure digital marketplaces and network diagnostic suites. Integrated robust server side authorization, distributed worker nodes, and live network metrics.",
+      role: "Founder & Technical Content Creator",
+      company: "abhi.iterates (Instagram & YouTube)",
+      description: "Produce technical educational content, design interactive roadmaps, and publish comprehensive systems engineering guides.",
       highlights: [
-        "Built Distributed Network Monitoring Portal handling real-time Wi-Fi diagnostic metrics.",
-        "Implemented secure digital resource marketplaces using JPA entity tracking and secure byte-stream protection.",
+        "Create conceptual backend architectures and coding tutorials for 10k+ followers.",
+        "Design and distribute comprehensive DSA, MLOps, and Full-Stack preparation cheat sheets.",
+        "Build open-source projects to showcase practical learning guides for student placement prep.",
       ],
     },
     {
-      year: "2023 - 2024",
-      role: "Software Engineer",
-      company: "Tech Systems",
-      description: "Focused on building microservices, developing ML pipelines, and integrating real-time telemetry systems.",
+      year: "2023 - Present",
+      role: "Student Mentor & Placement Coordinator",
+      company: "Engineering Community Mentorship",
+      description: "Guide junior engineering students in career planning, development roadmaps, and project construction.",
       highlights: [
-        "Designed and maintained backend microservices using Spring Boot and FastAPI.",
-        "Accelerated model inference pipelines by integrating optimized GPU worker pools.",
-      ],
-    },
-    {
-      year: "2021 - 2023",
-      role: "Associate Engineer",
-      company: "Data Solutions",
-      description: "Developed and optimized data scraping protocols and automated report systems.",
-      highlights: [
-        "Automated WhatsApp chat diagnostic engines processing 10k+ messages under 3 seconds.",
-        "Reduced database query overhead by 40% through indexing and structural denormalization.",
+        "Conducted placement readiness sessions covering backend development and distributed networks.",
+        "Mentored students in building production-ready projects, standardizing on clean code and testing.",
+        "Curated optimized placement preparation roadmaps targeting roles in data science and systems engineering.",
       ],
     },
   ],

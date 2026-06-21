@@ -246,33 +246,33 @@ export default function Navbar() {
                     <div>
                       <span className="text-emerald-500 font-bold">&gt; </span>
                       <span className="text-foreground font-semibold">name:</span>{" "}
-                      <Typewriter text="Abhishek Prajapati" delay={25} onComplete={() => setTypingStep(1)} />
+                      <Typewriter text="Abhishek Kr Prajapati" delay={25} onComplete={() => setTypingStep(1)} />
                     </div>
                     {typingStep >= 1 && (
                       <div>
                         <span className="text-emerald-500 font-bold">&gt; </span>
-                        <span className="text-foreground font-semibold">role:</span>{" "}
-                        <Typewriter text="Senior Backend & Full-Stack Architect" delay={20} onComplete={() => setTypingStep(2)} />
+                        <span className="text-foreground font-semibold">channel:</span>{" "}
+                        <Typewriter text="@abhi.iterates (Insta & YT)" delay={20} onComplete={() => setTypingStep(2)} />
                       </div>
                     )}
                     {typingStep >= 2 && (
                       <div>
                         <span className="text-emerald-500 font-bold">&gt; </span>
-                        <span className="text-foreground font-semibold">focus:</span>{" "}
-                        <Typewriter text="Distributed Systems & ML" delay={20} onComplete={() => setTypingStep(3)} />
+                        <span className="text-foreground font-semibold">mentoring:</span>{" "}
+                        <Typewriter text="10k+ engineering students" delay={20} onComplete={() => setTypingStep(3)} />
                       </div>
                     )}
                     {typingStep >= 3 && (
                       <div>
                         <span className="text-emerald-500 font-bold">&gt; </span>
-                        <span className="text-foreground font-semibold">location:</span>{" "}
-                        <Typewriter text="Bengaluru, India" delay={20} onComplete={() => setTypingStep(4)} />
+                        <span className="text-foreground font-semibold">notes:</span>{" "}
+                        <Typewriter text="Placement roadmaps & study material" delay={20} onComplete={() => setTypingStep(4)} />
                       </div>
                     )}
                     {typingStep >= 4 && (
                       <div className="text-foreground/90 font-semibold mt-1">
                         <span className="text-emerald-500 font-bold">&gt; </span>
-                        <span className="text-indigo-400">code | learn | iterate</span>
+                        <span className="text-indigo-400">learn | build | iterate</span>
                         <span className="animate-pulse duration-700 ml-1">▋</span>
                       </div>
                     )}
