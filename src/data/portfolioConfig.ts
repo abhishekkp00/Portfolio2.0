@@ -137,8 +137,8 @@ export const portfolioConfig: PortfolioConfig = {
     },
   ],
   github: {
-    username: "abhi-iterates", // Based on active workspace & name
-    allowedRepos: ["wifi-monitor", "whatsapp-analyzer", "portfolio"],
+    username: "abhishekkp00", // The active GitHub profile
+    allowedRepos: ["Wifi-Monitor", "Abhi.iterates-OS", "AbhiKharidoo-Ecommerce", "Image-editor"],
     hiddenRepos: [],
     projectOverrides: [
       {

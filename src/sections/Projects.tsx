@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { portfolioConfig } from "@/data/portfolioConfig";
 import { Github, ExternalLink, Folder, Star, GitFork } from "lucide-react";
 
+import { analyzeRepoSkills, generateRepoHighlights } from "@/lib/github";
 import TiltCard from "@/components/layout/TiltCard";
 
 interface RepoData {
@@ -39,20 +40,22 @@ export default function Projects() {
   useEffect(() => {
     async function fetchRepos() {
       try {
-        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+        const response = await fetch(`https://api.github.com/users/${username}/starred`);
         if (!response.ok) {
           throw new Error("GitHub API request failed");
         }
-        const data: RepoData[] = await response.json();
+        const data: any[] = await response.json();
 
-        // Map and merge with overrides
+        // Filter: only show repositories owned by the user themselves
         const merged = data
           .filter((repo) => {
-            // Only include repos in allowedRepos
-            return allowedRepos.includes(repo.name);
+            return repo.owner.login.toLowerCase() === username.toLowerCase();
           })
           .map((repo) => {
             const override = projectOverrides.find((o) => o.repoName === repo.name);
+            const techStack = override?.techStackOverride || analyzeRepoSkills(repo.name, repo.description || "", repo.language);
+            const highlights = override?.highlights || generateRepoHighlights(repo.name, repo.description || "", repo.stargazers_count, repo.forks_count, repo.language);
+
             return {
               repoName: repo.name,
               title: override?.customTitle || repo.name,
@@ -61,8 +64,8 @@ export default function Projects() {
               liveDemoUrl: override?.liveDemoUrl,
               stars: repo.stargazers_count,
               forks: repo.forks_count,
-              techStack: override?.techStackOverride || (repo.language ? [repo.language] : []),
-              highlights: override?.highlights || [],
+              techStack,
+              highlights,
               featured: override?.featured || false,
             };
           });
@@ -81,18 +84,22 @@ export default function Projects() {
         setError(true);
 
         // Fallback: Generate list purely from local config overrides
-        const fallbackList = projectOverrides.map((override) => ({
-          repoName: override.repoName,
-          title: override.customTitle || override.repoName,
-          description: override.customDescription || "",
-          githubUrl: `https://github.com/${username}/${override.repoName}`,
-          liveDemoUrl: override.liveDemoUrl,
-          stars: 0,
-          forks: 0,
-          techStack: override.techStackOverride || [],
-          highlights: override.highlights,
-          featured: override.featured,
-        }));
+        const fallbackList = projectOverrides.map((override) => {
+          const techStack = override.techStackOverride || analyzeRepoSkills(override.repoName, override.customDescription || "");
+          const highlights = override.highlights || generateRepoHighlights(override.repoName, override.customDescription || "", 0, 0);
+          return {
+            repoName: override.repoName,
+            title: override.customTitle || override.repoName,
+            description: override.customDescription || "",
+            githubUrl: `https://github.com/${username}/${override.repoName}`,
+            liveDemoUrl: override.liveDemoUrl,
+            stars: 0,
+            forks: 0,
+            techStack,
+            highlights,
+            featured: override.featured,
+          };
+        });
 
         setProjects(fallbackList);
       } finally {
@@ -101,7 +108,7 @@ export default function Projects() {
     }
 
     fetchRepos();
-  }, [username, projectOverrides, allowedRepos]);
+  }, [username, projectOverrides]);
 
   const containerVariants = {
     hidden: { opacity: 0 },

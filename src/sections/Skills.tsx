@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { portfolioConfig } from "@/data/portfolioConfig";
+import { analyzeRepoSkills } from "@/lib/github";
 import {
   Coffee,
   Database,
@@ -102,6 +104,37 @@ function SkillIcon({ iconName, className = "w-5 h-5" }: SkillIconProps) {
 
 export default function Skills() {
   const { skills } = portfolioConfig;
+  const { username } = portfolioConfig.github;
+  const [skillUsage, setSkillUsage] = useState<Record<string, string[]>>({});
+
+  useEffect(() => {
+    async function fetchStarredRepos() {
+      try {
+        const response = await fetch(`https://api.github.com/users/${username}/starred`);
+        if (!response.ok) return;
+        const data: any[] = await response.json();
+
+        const map: Record<string, string[]> = {};
+        data
+          .filter((repo) => repo.owner.login.toLowerCase() === username.toLowerCase())
+          .forEach((repo) => {
+            const analyzed = analyzeRepoSkills(repo.name, repo.description || "", repo.language);
+            analyzed.forEach((skillName) => {
+              if (!map[skillName]) {
+                map[skillName] = [];
+              }
+              if (!map[skillName].includes(repo.name)) {
+                map[skillName].push(repo.name);
+              }
+            });
+          });
+        setSkillUsage(map);
+      } catch (err) {
+        console.warn("Failed to fetch starred repos for skills page:", err);
+      }
+    }
+    fetchStarredRepos();
+  }, [username]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -162,21 +195,32 @@ export default function Skills() {
                   </h3>
 
                   <div className="grid grid-cols-2 gap-4">
-                    {category.items.map((skill, skillIdx) => (
-                      <motion.div
-                        key={skillIdx}
-                        whileHover={{ scale: 1.04, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="group flex items-center gap-3 p-3.5 rounded-xl border border-border/30 hover:border-border/80 bg-muted/10 hover:bg-muted/30 transition-all duration-200 cursor-default select-none shadow-sm hover:shadow-md"
-                      >
-                        <div className="flex-shrink-0 text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                          <SkillIcon iconName={skill.iconName} className="w-5 h-5" />
-                        </div>
-                        <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                          {skill.name}
-                        </span>
-                      </motion.div>
-                    ))}
+                    {category.items.map((skill, skillIdx) => {
+                      const projectsUsingSkill = skillUsage[skill.name] || [];
+                      return (
+                        <motion.div
+                          key={skillIdx}
+                          whileHover={{ scale: 1.04, y: -2 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="group flex items-center gap-3 p-3.5 rounded-xl border border-border/30 hover:border-border/80 bg-muted/10 hover:bg-muted/30 transition-all duration-200 cursor-default select-none shadow-sm hover:shadow-md w-full"
+                        >
+                          <div className="flex-shrink-0 text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                            <SkillIcon iconName={skill.iconName} className="w-5 h-5" />
+                          </div>
+                          <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                            {skill.name}
+                          </span>
+                          {projectsUsingSkill.length > 0 && (
+                            <span
+                              className="ml-auto text-[9px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 group-hover:bg-zinc-700/80 group-hover:text-zinc-200 transition-colors"
+                              title={`Used in: ${projectsUsingSkill.join(', ')}`}
+                            >
+                              {projectsUsingSkill.length} {projectsUsingSkill.length === 1 ? 'repo' : 'repos'}
+                            </span>
+                          )}
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </div>
               </TiltCard>
