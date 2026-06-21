@@ -88,7 +88,7 @@ export function generateRepoHighlights(name: string, description: string, stars:
     highlights.push(
       "Client-side image processing and crop/scale filters",
       "Canvas-based vector editing framework",
-      "Optimized rendering pipeline for quick edits"
+      "Optimized rendering for quick edits"
     );
   } else {
     // Generics based on repo data

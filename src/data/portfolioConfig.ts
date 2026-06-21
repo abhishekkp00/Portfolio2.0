@@ -55,15 +55,15 @@ export interface PortfolioConfig {
 export const portfolioConfig: PortfolioConfig = {
   profile: {
     name: "Abhishek Kr Prajapati",
-    title: "CSE (Data Science) Undergraduate",
-    subTitle: "Developer, Educator & Mentor (@abhi.iterates)",
-    bio: "I am a developer and educator based in Bengaluru, India. I specialize in backend systems, distributed network architectures, and machine learning pipelines. Through my platform, abhi.iterates (Instagram & YouTube), I mentor engineering students, share placement roadmaps, and distribute structured study notes to accelerate placement preparation.",
+    title: "CSE(Data Science) Undergraduate",
+    subTitle: "Developer & Mentor (@abhi.iterates)",
+    bio: "I am a developer and educational content creator based in Bengaluru, India. I specialize in backend systems, distributed network architectures, and machine learning pipelines. Through my platform, abhi.iterates (Instagram), I mentor engineering students, share placement roadmaps, and distribute structured study notes to accelerate placement preparation.",
     location: "Bengaluru, Karnataka, India",
     timezone: "Asia/Kolkata",
     socials: {
       github: "https://github.com/abhishekkp00",
       linkedin: "https://linkedin.com/in/abhishekkp00",
-      email: "abhishekfrcollege@gmail.com",
+      email: "abhishekforcollege@gmail.com",
       instagram: "https://instagram.com/abhi.iterates",
       youtube: "https://youtube.com/@abhi.iterates",
     },
@@ -110,30 +110,19 @@ export const portfolioConfig: PortfolioConfig = {
   ],
   timeline: [
     {
-      year: "2024 - Present",
-      role: "Founder & Technical Content Creator",
-      company: "abhi.iterates (Instagram & YouTube)",
+      year: "2026- Present",
+      role: "Technical Content Creator",
+      company: "abhi.iterates (Instagram)",
       description: "Produce technical educational content, design interactive roadmaps, and publish comprehensive systems engineering guides.",
       highlights: [
-        "Create conceptual backend architectures and coding tutorials for 10k+ followers.",
-        "Design and distribute comprehensive DSA, MLOps, and Full-Stack preparation cheat sheets.",
+        "Create conceptual backend architectures and coding tutorials for 100+ followers.",
+        "Design and distribute comprehensive DSA and Full-Stack preparation cheat sheets.",
         "Build open-source projects to showcase practical learning guides for student placement prep.",
       ],
-    },
-    {
-      year: "2023 - Present",
-      role: "Student Mentor & Placement Coordinator",
-      company: "Engineering Community Mentorship",
-      description: "Guide junior engineering students in career planning, development roadmaps, and project construction.",
-      highlights: [
-        "Conducted placement readiness sessions covering backend development and distributed networks.",
-        "Mentored students in building production-ready projects, standardizing on clean code and testing.",
-        "Curated optimized placement preparation roadmaps targeting roles in data science and systems engineering.",
-      ],
-    },
+    }
   ],
   github: {
-    username: "abhishekkp00", // The active GitHub profile
+    username: "abhishekkp00",
     allowedRepos: ["Wifi-Monitor", "Abhi.iterates-OS", "AbhiKharidoo-Ecommerce", "Image-editor"],
     hiddenRepos: [],
     projectOverrides: [
