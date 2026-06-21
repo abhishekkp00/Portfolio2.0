@@ -38,36 +38,14 @@ export default function Hero() {
         animate="visible"
         className="w-full max-w-3xl flex flex-col gap-6 md:gap-8 text-center md:text-left relative z-10"
       >
-        {/* Availability Badge & Status Indicators */}
-        <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 self-center md:self-start">
-          <motion.div variants={itemVariants} className="inline-flex">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card/60 backdrop-blur-sm text-xs font-mono text-muted-foreground shadow-sm">
-              <MapPin className="w-3.5 h-3.5 text-zinc-500" />
-              <span>{location}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center justify-center gap-2 text-[10px] font-mono text-zinc-400"
-          >
-            <span className="flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              API Uptime: 99.9%
-            </span>
-            <span className="text-zinc-600">•</span>
-            <span className="flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-              Ping: 14ms
-            </span>
-            <span className="text-zinc-600">•</span>
-            <span className="flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
-              ML Service: Active
-            </span>
-          </motion.div>
-        </div>
+        {/* Availability Badge */}
+        <motion.div variants={itemVariants} className="inline-flex self-center md:self-start">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card/60 backdrop-blur-sm text-xs font-mono text-muted-foreground shadow-sm">
+            <MapPin className="w-3.5 h-3.5 text-zinc-500" />
+            <span>{location}</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          </div>
+        </motion.div>
 
         {/* Name and Titles */}
         <div className="flex flex-col gap-3 md:gap-4">
