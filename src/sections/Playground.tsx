@@ -229,15 +229,15 @@ export default function Playground() {
             {isMatrixActive && (
               <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 0.15 }}
+                animate={{ opacity: 0.35 }}
                 exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-black pointer-events-none overflow-hidden z-0"
+                className="absolute inset-0 bg-black/85 pointer-events-none overflow-hidden z-0"
               >
-                <div className="matrix-rain-sim text-xs text-green-500 leading-none">
+                <div className="matrix-rain-sim text-xs text-[#1af13b] leading-none drop-shadow-[0_0_4px_rgba(26,241,59,0.4)]">
                   {Array.from({ length: 15 }).map((_, i) => (
                     <div
                       key={i}
-                      className="absolute animate-matrix-drop"
+                      className="absolute animate-matrix-drop font-bold"
                       style={{
                         left: `${i * 7}%`,
                         animationDelay: `${i * 0.4}s`,
