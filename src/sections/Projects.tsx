@@ -163,7 +163,7 @@ export default function Projects() {
             {projects.map((project) => (
               <motion.div key={project.repoName} variants={itemVariants} className="w-full h-full">
                 <TiltCard className="w-full h-full">
-                  <div className="group relative flex flex-col justify-between glass p-6 md:p-8 rounded-2xl border border-border/40 hover:border-border/80 shadow-md h-full transition-all duration-300 overflow-hidden">
+                  <div className="group relative flex flex-col justify-between glass p-6 md:p-8 rounded-2xl border border-border/40 group-hover:border-transparent shadow-md h-full transition-all duration-300 overflow-hidden">
                 {/* Visual glow overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-zinc-200/5 to-zinc-300/0 dark:from-zinc-800/10 dark:to-zinc-900/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 

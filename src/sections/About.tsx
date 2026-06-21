@@ -161,7 +161,7 @@ export default function About() {
 
                   {/* Timeline Card */}
                   <TiltCard>
-                    <div className="glass p-6 md:p-8 rounded-xl border border-border/40 hover:border-border/80 shadow-md transition-all duration-300 flex flex-col gap-4">
+                    <div className="glass p-6 md:p-8 rounded-xl border border-border/40 group-hover:border-transparent shadow-md transition-all duration-300 flex flex-col gap-4">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                         <div className="flex flex-col">
                           <h4 className="font-bold text-lg leading-tight tracking-tight">

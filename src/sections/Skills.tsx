@@ -155,7 +155,7 @@ export default function Skills() {
           {skills.map((category, catIdx) => (
             <motion.div key={catIdx} variants={itemVariants} className="w-full h-full">
               <TiltCard className="w-full h-full">
-                <div className="glass p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col gap-6 h-full">
+                <div className="glass p-8 rounded-2xl border border-border/60 group-hover:border-transparent transition-all duration-300 shadow-lg flex flex-col gap-6 h-full">
                   <h3 className="text-lg font-bold font-mono tracking-tight text-foreground border-b border-border/40 pb-3 flex items-center gap-2">
                     <span className="text-xs font-mono text-zinc-400">0{catIdx + 1}.</span>
                     {category.category}

@@ -59,33 +59,38 @@ export default function TiltCard({ children, className = "", maxRotation = 8 }: 
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative rounded-2xl overflow-hidden transition-shadow duration-300 ${className}`}
+      className={`relative rounded-2xl overflow-hidden transition-shadow duration-300 group ${className}`}
       style={{
         transformStyle: "preserve-3d",
         rotateX: rotateX,
         rotateY: rotateY,
         perspective: 1000,
       }}
+      animate={{
+        scale: isHovered ? 1.025 : 1,
+        y: isHovered ? -5 : 0,
+      }}
+      transition={{ type: "spring", stiffness: 350, damping: 25 }}
     >
-      {/* Glow Effect / Glare Reflection Overlay */}
+      {/* Premium holographic glare reflection */}
       <motion.div
-        className="absolute inset-0 pointer-events-none z-10 transition-opacity duration-500"
+        className="absolute inset-0 pointer-events-none z-10 transition-opacity duration-300"
         style={{
-          opacity: isHovered ? 0.15 : 0,
-          background: `radial-gradient(circle 250px at ${glowX} ${glowY}, var(--primary-foreground, rgba(255, 255, 255, 0.4)), transparent)`,
+          opacity: isHovered ? 1 : 0,
+          background: `radial-gradient(circle 240px at ${glowX} ${glowY}, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%)`,
         }}
       />
 
       {/* Underlay glow gradient border effect on hover */}
       <motion.div
-        className="absolute -inset-[1px] rounded-2xl -z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-zinc-200 to-zinc-400 dark:from-zinc-800 dark:to-zinc-600"
+        className="absolute -inset-[1.5px] rounded-2xl -z-10 pointer-events-none transition-opacity duration-500 bg-gradient-to-br from-zinc-400/30 via-zinc-200/5 to-zinc-400/30 dark:from-zinc-700/40 dark:via-zinc-800/10 dark:to-zinc-700/40 opacity-0"
         style={{
           opacity: isHovered ? 1 : 0,
         }}
       />
 
       {/* Render children inside wrapper */}
-      <div style={{ transform: "translateZ(10px)" }}>{children}</div>
+      <div style={{ transform: "translateZ(10px)" }} className="h-full w-full">{children}</div>
     </motion.div>
   );
 }

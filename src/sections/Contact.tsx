@@ -113,7 +113,7 @@ export default function Contact() {
           <div className="lg:col-span-5 flex flex-col gap-8">
             <motion.div variants={itemVariants} className="w-full">
               <TiltCard maxRotation={4}>
-                <div className="glass p-6 md:p-8 rounded-2xl border border-border/60 shadow-lg flex flex-col gap-6">
+                <div className="glass p-6 md:p-8 rounded-2xl border border-border/60 group-hover:border-transparent transition-all duration-300 shadow-lg flex flex-col gap-6">
                   <h3 className="text-lg font-bold font-mono tracking-tight flex items-center gap-2">
                     <Clock className="w-5 h-5 text-muted-foreground" />
                     Local Coordinates
@@ -143,7 +143,7 @@ export default function Contact() {
                 <TiltCard maxRotation={5}>
                   <a
                     href={`mailto:${email}`}
-                    className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex items-center gap-4 transition-all duration-200 w-full"
+                    className="glass p-5 rounded-xl border border-border/40 group-hover:border-transparent flex items-center gap-4 transition-all duration-300 w-full"
                   >
                     <div className="p-2.5 rounded-lg bg-muted/40 text-muted-foreground group-hover:text-foreground group-hover:bg-muted/80 transition-colors">
                       <Mail className="w-5 h-5" />
@@ -163,7 +163,7 @@ export default function Contact() {
                       href={linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex flex-col gap-3 transition-all duration-200 w-full"
+                      className="glass p-5 rounded-xl border border-border/40 group-hover:border-transparent flex flex-col gap-3 transition-all duration-300 w-full"
                     >
                       <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                       <div className="flex flex-col">
@@ -180,7 +180,7 @@ export default function Contact() {
                       href={github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group glass p-5 rounded-xl border border-border/40 hover:border-border/80 flex flex-col gap-3 transition-all duration-200 w-full"
+                      className="glass p-5 rounded-xl border border-border/40 group-hover:border-transparent flex flex-col gap-3 transition-all duration-300 w-full"
                     >
                       <Github className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                       <div className="flex flex-col">
@@ -198,7 +198,7 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <motion.div variants={itemVariants} className="w-full">
               <TiltCard maxRotation={2}>
-                <div className="glass p-6 md:p-8 rounded-2xl border border-border/60 shadow-lg w-full">
+                <div className="glass p-6 md:p-8 rounded-2xl border border-border/60 group-hover:border-transparent transition-all duration-300 shadow-lg w-full">
               <AnimatePresence mode="wait">
                 {status === "success" ? (
                   <motion.div
